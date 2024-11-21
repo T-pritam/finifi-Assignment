@@ -16,8 +16,8 @@ export interface IInvoice extends Document {
 
 // Define the schema for the Invoice model
 const InvoiceSchema: Schema = new Schema<IInvoice>({
-  vendorName: { type: String, required: true, trim: true },
-  invoiceNumber: { type: String, required: true, unique: true },
+  vendorName: { type: String, required: false, trim: true },
+  invoiceNumber: { type: String, required: false, unique: true },
   status: {
     type: String,
     enum: [
@@ -31,12 +31,12 @@ const InvoiceSchema: Schema = new Schema<IInvoice>({
       'Duplicate',
       'Void',
     ],
-    required: true,
+    required: false,
   },
   netAmount: { type: Number, required: true },
   invoiceDate: { type: Date, required: true },
   dueDate: { type: Date, required: true },
-  department: { type: String, required: true, trim: true },
+  department: { type: String, required: false, trim: true },
   poNumber: { type: String, required: true, trim: true },
   createdTime: { type: Date, default: Date.now },
   createdDate: { type: Date, default: () => new Date().setHours(0, 0, 0, 0) },

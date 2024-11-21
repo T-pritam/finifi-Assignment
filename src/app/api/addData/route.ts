@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
+import dbConnect from '@/lib/db';
 import Invoice from '@/model/invoice';
 
 // Helper functions for random data generation
@@ -15,7 +16,7 @@ const statuses = ['Open', 'Awaiting Approval', 'Approved', 'Processing', 'Paid',
 export async function POST() {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGO_URI!);
+    dbConnect()
 
     const rowCount = getRandomNumber(150, 200); // Generate between 150 and 200 rows
     const invoices = [];
@@ -58,7 +59,7 @@ export async function POST() {
         createdDate,
       });
     }
-
+    console.log(invoices.length)
     // Bulk insert invoices
     const insertedInvoices = await Invoice.insertMany(invoices);
 
