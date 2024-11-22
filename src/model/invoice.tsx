@@ -9,6 +9,7 @@ export interface IInvoice extends Document {
   invoiceDate: Date;
   dueDate: Date;
   department: string;
+  costCenter: string;
   poNumber: string;
   createdTime: Date;
   createdDate: Date;
@@ -37,7 +38,8 @@ const InvoiceSchema: Schema = new Schema<IInvoice>({
   invoiceDate: { type: Date, required: true },
   dueDate: { type: Date, required: true },
   department: { type: String, required: false, trim: true },
-  poNumber: { type: String, required: true, trim: true },
+  costCenter: { type: String, required: false, trim: true },
+  poNumber: { type: String, required: false, trim: true },
   createdTime: { type: Date, default: Date.now },
   createdDate: { type: Date, default: () => new Date().setHours(0, 0, 0, 0) },
 });

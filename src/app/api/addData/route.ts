@@ -32,7 +32,7 @@ export async function POST() {
         ? 'Vendor Not Found'
         : getRandomElement(statuses);
 
-      const invoiceNumber = isDuplicate ? `DUP${getRandomNumber(100, 999)}` : `INV${getRandomNumber(1000, 9999)}`;
+      const invoiceNumber = isDuplicate ? `DUP000${getRandomNumber(100, 999)}` : `INV${getRandomNumber(1000, 9999)}`;
       const netAmount = getRandomNumber(50000, 100000); // Greater than 50,000
       const roundedAmount = Math.ceil(netAmount / 250) * 250; // Round to nearest 250
 

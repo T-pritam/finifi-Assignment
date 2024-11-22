@@ -1,13 +1,20 @@
-const Navbar = () => {
+import { FaRegUserCircle } from "react-icons/fa";
+
+const Navbar = (props : { header : string}) => {
     return (
-      <header className="bg-white shadow p-4 flex justify-between items-center">
-        <h1 className="text-xl font-semibold">Dashboard</h1>
-        <div>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Profile
-          </button>
+      <div>
+        <div className="bg-[#eaecee] py-2 px-8 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold">{props.header}</h1>
+        <div className="flex items-center gap-3">
+            <FaRegUserCircle size={35} />
+            <div>
+                <p className="font-semibold text-md">Rohit Sharma</p>
+                <p className="text-xs">rohit@gmail</p>
+            </div>         
         </div>
-      </header>
+      </div>
+      <hr className="h-px border-0 bg-gray-500" />
+      </div>
     );
   };
   
