@@ -8,7 +8,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { useDebounce } from 'use-debounce';
 import '@/components/css/scrollbar.css'
-import { set } from "mongoose";
 
 export default function Page() {
 
