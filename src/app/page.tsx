@@ -8,6 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { useDebounce } from 'use-debounce';
 import '@/components/css/scrollbar.css'
+import { set } from "mongoose";
 
 export default function Page() {
 
@@ -19,14 +20,14 @@ export default function Page() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [activeState, setActiveState] = useState<string>("All");
   const [searchText, setSearchText] = useState<string>("");
-  const [searchType, setSearchType] = useState<string>("Vendor Name");
+  const [searchType, setSearchType] = useState<string>("vendorName");
   const [debouncedSearchText] = useDebounce(searchText, 500);
 
   useEffect(() => {
 
     const fetchInvoices = async () => {
       try {
-        const response = await axios.get('api/invoices');
+        const response = await axios.get('api/invoices/getdata');
         setAllInvoices(response.data.data);
         setInvoices(response.data.data.slice(0, pageSize));
         setTotalPage(Math.ceil(response.data.data.length / pageSize));
@@ -36,6 +37,28 @@ export default function Page() {
     };
     fetchInvoices();
   },[]);
+
+  useEffect(() => {
+    async function getSortedData() {
+        try {
+          const sortedData = await axios.post('api/invoices/getdata', {
+            searchType,searchText : debouncedSearchText
+          })
+          console.log(sortedData.data.data)
+          setInvoices(sortedData.data.data)
+          setTotalPage(Math.ceil(sortedData.data.data.length / pageSize))
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    console.log(searchText)
+    if (searchText.trim() !== "") {
+      getSortedData()
+    } else {
+      setInvoices(allInvoices.slice((pageNumber - 1) * pageSize, pageNumber * pageSize))
+      setTotalPage(Math.ceil(allInvoices.length / pageSize))
+    }
+  },[debouncedSearchText])
 
   useEffect(() => {
     const sortedInvoices = allInvoices.filter((invoice) => {
