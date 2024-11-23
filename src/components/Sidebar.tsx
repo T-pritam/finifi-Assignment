@@ -4,7 +4,7 @@ import { MdDashboard } from "react-icons/md";
 import { TbInvoice } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-
+import { VscOrganization } from "react-icons/vsc";
 
 const Sidebar = () => {
     const router = useRouter();
@@ -53,7 +53,7 @@ const Sidebar = () => {
                     router.push('/vendors')
                     }}>
                     <button className="flex justify-center items-center gap-2">
-                        <IoSettingsOutline className="" size={22} color={`${isVendorActive ? '#ddd' : '#2c3e50'}`} />
+                        <VscOrganization className="" size={22} color={`${isVendorActive ? '#ddd' : '#2c3e50'}`} />
                         <p className={`text-lg  ${isVendorActive ? 'text-[#ddd]' : 'text-[#2c3e50]'}`}>Vendors</p>
                     </button>
                 </div>

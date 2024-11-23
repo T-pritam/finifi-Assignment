@@ -15,7 +15,6 @@ const statuses = ['Open', 'Awaiting Approval', 'Approved', 'Processing', 'Paid',
 // Populate 150-200 invoices
 export async function POST() {
   try {
-    // Connect to MongoDB
     dbConnect()
 
     const rowCount = getRandomNumber(150, 200); // Generate between 150 and 200 rows
@@ -32,7 +31,7 @@ export async function POST() {
         ? 'Vendor Not Found'
         : getRandomElement(statuses);
 
-      const invoiceNumber = isDuplicate ? `DUP000${getRandomNumber(100, 999)}` : `INV${getRandomNumber(1000, 9999)}`;
+      const invoiceNumber = isDuplicate ? `DUP000${getRandomNumber(100, 999) + i}` : `INV000${getRandomNumber(1000, 9999)}`;
       const netAmount = getRandomNumber(50000, 100000); // Greater than 50,000
       const roundedAmount = Math.ceil(netAmount / 250) * 250; // Round to nearest 250
 
@@ -55,6 +54,7 @@ export async function POST() {
         dueDate,
         department: getRandomElement(['Finance', 'Sales', 'HR', 'IT']),
         poNumber: `PO${getRandomNumber(1000, 9999)}`,
+        costCenter: getRandomElement(['Mumbai', 'Delhi', 'Chennai',"Bengaluru", "" , "Hyderabad"]),
         createdTime,
         createdDate,
       });
