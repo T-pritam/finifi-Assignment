@@ -1,6 +1,5 @@
 import dbConnect from "@/lib/db";
 import Invoice from "@/model/invoice";
-import Vendor from "@/model/vendor"; // Import the Vendor model
 
 export async function GET() {
     await dbConnect();
