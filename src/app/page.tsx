@@ -2,7 +2,7 @@
 import Navbar from "@/components/Navbar";
 import Queries from "@/components/Queries";
 import { useEffect,useState } from "react";
-import { Invoice} from "@/model/invoice";
+import { Invoice } from "@/types/invoice";
 import axios from "axios";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
@@ -27,6 +27,7 @@ export default function Page() {
     const fetchInvoices = async () => {
       try {
         const response = await axios.get('api/invoices/getdata');
+        console.log(response.data.data)
         setAllInvoices(response.data.data);
         setInvoices(response.data.data.slice(0, pageSize));
         setTotalPage(Math.ceil(response.data.data.length / pageSize));
@@ -128,7 +129,7 @@ export default function Page() {
                     invoices.map((invoice, index) => (
                       <tr key={index} className="border-b border-gray-300 text-center">
                         <td className="px-4  py-2 border-r border-gray-300 sticky left-0 bg-white z-10 w-[150px]">
-                          {invoice.vendorName}
+                          {invoice.vendor === null ? "" : invoice.vendor.name}
                         </td>
                         <td className="px-4 py-2 w-[100px]">{invoice.invoiceNumber}</td>
                         <td className="px-4 py-2 w-[200px]">{invoice.status}</td>

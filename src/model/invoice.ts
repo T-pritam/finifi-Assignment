@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 // Define the interface for the Invoice document
 export interface Invoice extends Document {
-  vendorName: string;
+  vendor : mongoose.Types.ObjectId;
   invoiceNumber: string;
   status: string;
   netAmount: number;
@@ -17,7 +17,7 @@ export interface Invoice extends Document {
 
 // Define the schema for the Invoice model
 const InvoiceSchema: Schema = new Schema<Invoice>({
-  vendorName: { type: String, required: false, trim: true },
+  vendor: { type: Schema.Types.ObjectId, ref: 'Vendor', required: false },
   invoiceNumber: { type: String, required: false, unique: true },
   status: {
     type: String,

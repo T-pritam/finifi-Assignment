@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import { IoSearch } from "react-icons/io5";
+import { useRouter } from 'next/navigation';
 
 function Queries(props: {
     activeState : string, 
@@ -10,6 +11,7 @@ function Queries(props: {
     setSearchText: React.Dispatch<React.SetStateAction<string>>,
     setSearchType: React.Dispatch<React.SetStateAction<string>>
 }) {
+    const router = useRouter();
     const handleButtonClick = (buttonName: string) => {
         props.setActiveState(buttonName);
     }
@@ -36,7 +38,7 @@ function Queries(props: {
 
             <div className="px-16 py-2 flex row w-full">
 
-                <div className='bg-[#2c3e50] p-1 px-4 rounded w-40 cursor-pointer'>
+                <div className='bg-[#2c3e50] p-1 px-4 rounded w-40 cursor-pointer' onClick={() => router.push('/create')}>
                     <p className='text-center text-[#ddd]'>Create Invoice</p>
                 </div>
 
